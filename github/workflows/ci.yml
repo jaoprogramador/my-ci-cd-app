@@ -1,0 +1,46 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main  # Ejecuta este flujo solo cuando haya un push a la rama 'main'
+  pull_request:
+    branches:
+      - main  # Ejecuta el flujo cuando se cree un PR a la rama 'main'
+
+jobs:
+  # Trabajo de construcción e integración continua
+  build:
+    runs-on: ubuntu-latest  # Usar un entorno Ubuntu
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # O la versión de Node.js que necesites
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm test  # O cualquier comando de pruebas que utilices
+
+  # Trabajo de despliegue
+  deploy:
+    runs-on: ubuntu-latest  # Usar el mismo entorno Ubuntu
+
+    needs: build  # Esto asegura que el despliegue solo se ejecute si la construcción es exitosa
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Production
+        run: |
+          curl https://api.render.com/deploy/srv-${{ secrets.RENDER_SERVICE_ID }}?key=${{ secrets.API_KEY_POKEMON }}
+        env:
+          RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
+          API_KEY_POKEMON: ${{ secrets.API_KEY_POKEMON }}
