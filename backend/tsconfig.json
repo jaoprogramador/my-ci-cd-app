@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "outDir": "./dist",         // Ubicación donde se guardan los archivos compilados
+    "rootDir": "./src",         // Carpeta donde se encuentran los archivos fuente
+    "module": "commonjs",       // Módulo compatible con Node.js
+    "target": "es6",            // Versión de ECMAScript
+    "strict": true,             // Activar comprobaciones estrictas
+    "esModuleInterop": true,    // Importar módulos comunes de Node.js como express
+    "skipLibCheck": true        // Evitar comprobaciones en archivos de definición de terceros
+  },
+  "include": ["src/**/*"],       // Archivos a incluir en la compilación
+  "exclude": ["node_modules"]   // Archivos a excluir
+}
