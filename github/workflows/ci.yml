@@ -3,10 +3,10 @@ name: CI/CD Pipeline
 on:
   push:
     branches:
-      - master  # Ejecuta este flujo solo cuando haya un push a la rama 'master'
+      - main  # Ejecuta este flujo solo cuando haya un push a la rama 'main'
   pull_request:
     branches:
-      - master  # Ejecuta el flujo cuando se cree un PR a la rama 'master'
+      - main  # Ejecuta el flujo cuando se cree un PR a la rama 'main'
 
 jobs:
   # Trabajo de construcción e integración continua
