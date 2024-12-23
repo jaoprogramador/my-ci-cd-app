@@ -11,7 +11,8 @@ app.use(express.static('dist'))
 // Configura CORS para permitir solicitudes desde http://localhost:5173
 app.use(cors({
   //origin: "http://localhost:5173"
-  origin:"https://tipescriptpacienteshospital.onrender.com"
+  //origin:"https://tipescriptpacienteshospital.onrender.com"
+  origin:"https://my-ci-cd-app.onrender.com"
   //origin: config.frontendOrigin, 
 })); 
 /* app.use(express.json());
