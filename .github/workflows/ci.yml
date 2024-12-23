@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main  # Ejecuta el flujo cuando se cree un PR a la rama 'main'
+  schedule:
+    - cron: '0 0 * * *'  # Este cron ejecuta el ping a las 12:00 AM todos los días
 
 jobs:
   # Trabajo de construcción e integración continua
@@ -44,3 +46,15 @@ jobs:
         env:
           RENDER_SERVICE_ID: ${{ secrets.RENDER_SERVICE_ID }}
           API_KEY_HOSPITAL: ${{ secrets.API_KEY_HOSPITAL }}
+
+  # Revisión de salud periódica (Health Check Ping)
+  health_check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Perform health check
+        run: |
+          curl --fail --silent --show-error https://your-deployed-app-url.com/health || echo "Health check failed!"
